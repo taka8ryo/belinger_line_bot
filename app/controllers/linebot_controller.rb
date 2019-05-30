@@ -47,7 +47,7 @@ class LinebotController < ApplicationController
           when '打率'
             message = {
               type: 'text',
-              text: "#{return_massage[:age]}です"
+              text: "#{return_message[:age]}です"
             }
             client.reply_message(event['replyToken'], message)
           end
