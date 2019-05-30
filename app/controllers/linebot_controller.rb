@@ -41,13 +41,16 @@ class LinebotController < ApplicationController
       case event
       when Line::Bot::Event::Message
         case event.type
+
         when Line::Bot::Event::MessageType::Text
-        when '打率'
-          message = {
-            type: 'text',
-            text: "#{return_massage[:age]}です"
-          }
-          client.reply_message(event['replyToken'], message)
+          case event.message['text']
+          when '打率'
+            message = {
+              type: 'text',
+              text: "#{return_massage[:age]}です"
+            }
+            client.reply_message(event['replyToken'], message)
+          end
         end
       end
     }
