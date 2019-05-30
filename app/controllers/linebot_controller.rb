@@ -1,7 +1,7 @@
 class LinebotController < ApplicationController
   require 'line/bot'
   require 'nokogiri'
-  require 'open/uri'
+  require 'open-uri'
 
   protect_from_forgery :except => [:callback]
 
