@@ -25,6 +25,8 @@ class LinebotController < ApplicationController
     homerun = doc.search("table tr:first-child td")[3].inner_text
     rbi = doc.search("table tr:first-child td")[5].inner_text
     hit = doc.search("table tr:first-child td")[7].inner_text
+    records = {ave: ave, homerun: homerun, rbi: rbi, hit: hit}
+    return records
   end
 
   def callback
