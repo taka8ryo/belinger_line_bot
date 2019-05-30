@@ -51,21 +51,25 @@ class LinebotController < ApplicationController
               type: 'text',
               text: "#{return_message[:ave]}です"
             }
+            client.reply_message(event['replyToken'], message)
           when 'ホームラン'
             message = {
               type: 'text',
               text: "#{return_message[:homerun]}本です"
             }
+            client.reply_message(event['replyToken'], message)
           when '打点'
             message = {
               type: 'text',
               text: "#{return_message[:rbi]}打点です"
             }
+            client.reply_message(event['replyToken'], message)
           when '安打'
             message = {
               type: 'text',
               text: "#{return_message[:hit]}本です"
             }
+            client.reply_message(event['replyToken'], message)
           else
             message = {
               type: 'text',
