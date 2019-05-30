@@ -53,6 +53,32 @@ class LinebotController < ApplicationController
             }
             client.reply_message(event['replyToken'], message)
           end
+          when 'ホームラン'
+            message = {
+              type: 'text',
+              text: "#{return_message[:homerun]}本です"
+            }
+            client.reply_message(event['replyToken'], message)
+          end
+          when '打点'
+            message = {
+              type: 'text',
+              text: "#{return_message[:rbi]}打点です"
+            }
+            client.reply_message(event['replyToken'], message)
+          end
+          when '安打'
+            message = {
+              type: 'text',
+              text: "#{return_message[:hit]}本です"
+            }
+            client.reply_message(event['replyToken'], message)
+          end
+        else
+          message = {
+            type: 'text',
+            text: "打率、ホームラン、打点、安打のどれかを送信してね( ^ω^ )"
+          }
         end
       end
     }
