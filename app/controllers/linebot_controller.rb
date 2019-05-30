@@ -12,14 +12,7 @@ class LinebotController < ApplicationController
     }
   end
 
-  def callback
-    body = request.body.read
-
-    signature = request.env['HTTP_X_LINE_SIGNATURE']
-    unless client.validate_signature(body, signature)
-      head :bad_request
-    end
-
+  def return_message
     charset = nil
     html = open("https://baseball.yahoo.co.jp/mlb/teams/player/737794") do |f|
       charset = f.charset
@@ -32,6 +25,15 @@ class LinebotController < ApplicationController
     homerun = doc.search("table tr:first-child td")[3].inner_text
     rbi = doc.search("table tr:first-child td")[5].inner_text
     hit = doc.search("table tr:first-child td")[7].inner_text
+  end
+
+  def callback
+    body = request.body.read
+
+    signature = request.env['HTTP_X_LINE_SIGNATURE']
+    unless client.validate_signature(body, signature)
+      head :bad_request
+    end
 
     events = client.parse_events_from(body)
 
@@ -43,7 +45,7 @@ class LinebotController < ApplicationController
         when '打率'
           message = {
             type: 'text',
-            text: "#{ave}です"
+            text: "#{return_massage[:age]}です"
           }
           client.reply_message(event['replyToken'], message)
         end
