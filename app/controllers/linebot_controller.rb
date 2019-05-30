@@ -66,13 +66,13 @@ class LinebotController < ApplicationController
               type: 'text',
               text: "#{return_message[:hit]}本です"
             }
+          else
+            message = {
+              type: 'text',
+              text: "打率、ホームラン、打点、安打のどれかを送信してね( ^ω^ )"
+            }
             client.reply_message(event['replyToken'], message)
           end
-        else
-          message = {
-            type: 'text',
-            text: "打率、ホームラン、打点、安打のどれかを送信してね( ^ω^ )"
-          }
         end
       end
     }
